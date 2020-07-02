@@ -2,8 +2,8 @@ import * as http from "http";
 import * as mongoose from "mongoose";
 import * as express from "express";
 import App from "./app";
-import FoodsRouter from "./router";
-import Scraper from "../app/services/scraping.service";
+import FoodRouter from "./routes/foodRouter";
+import FoodsController from "./controllers/foodController";
 
 export default class Server {
 
@@ -24,12 +24,10 @@ export default class Server {
     }
 
     private async initServer() {
-        const scraper = new Scraper();
-        await scraper.initBrowser();
+        const foodController = new FoodsController();
+        const foodRouter = new FoodRouter(foodController);
 
-        const foodsRouter = new FoodsRouter(scraper);
-
-        this.app = new App(foodsRouter).app;
+        this.app = new App(foodRouter).app;
         this.app.set("port", 3000);
         
         const server = http.createServer(this.app);

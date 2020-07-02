@@ -1,4 +1,4 @@
-import FoodsRouter from "./router";
+import FoodsRouter from "./routes/foodRouter";
 import * as express from "express";
 import * as compression from "compression";
 import * as helmet from "helmet";

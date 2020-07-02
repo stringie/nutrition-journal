@@ -1,1 +1,0 @@
-docker-compose -f /home/string/dev/personal/whf/backend/docker-compose.yml down

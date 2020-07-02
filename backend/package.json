@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/express": "^4.16.1",
+    "@types/bcrypt": "2.0.0",
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "compression": "^1.7.4",
@@ -18,7 +19,6 @@
     "express": "^4.16.4",
     "helmet": "^3.16.0",
     "mongoose": "^5.5.4",
-    "puppeteer": "^1.15.0",
     "ts-node": "^8.1.0",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5"
@@ -27,7 +27,6 @@
     "@types/cheerio": "^0.22.11",
     "@types/compression": "0.0.36",
     "@types/helmet": "0.0.43",
-    "@types/mongoose": "^5.3.26",
-    "@types/puppeteer": "^1.12.3"
+    "@types/mongoose": "^5.3.26"
   }
 }
