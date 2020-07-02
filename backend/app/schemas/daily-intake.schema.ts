@@ -6,7 +6,7 @@ export interface DailyIntakeModel extends Document, DailyIntake {}
 const dailyIntakeSchema: Schema = new Schema({
     nutrients: {
         type: Map,
-        of: { value: Number, dv: Number }
+        of: { value: Number, unit: String }
     },
     foods: [String],
     date: Date
