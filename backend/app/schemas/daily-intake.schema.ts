@@ -1,5 +1,5 @@
 import { model, Schema, Model, Document } from "mongoose"
-import { DailyIntake } from "../types/daily-intake";
+import { DailyIntake } from "../types/daily-intake"
 
 export interface DailyIntakeModel extends Document, DailyIntake {}
 
@@ -12,4 +12,4 @@ const dailyIntakeSchema: Schema = new Schema({
     date: Date
 });
 
-export const DailyIntakeSchema: Model<DailyIntakeModel> = model<DailyIntakeModel>("DailyIntake", dailyIntakeSchema);
+export const DailyIntakeSchema: Model<DailyIntakeModel> = model<DailyIntakeModel>("DailyIntake", dailyIntakeSchema)

@@ -5,18 +5,18 @@ export default class FoodRouter {
     public readonly router: Router;
 
     constructor(private foodController: FoodController) {
-        this.router = Router();
-        this.init();
+        this.router = Router()
+        this.init()
     }
 
     private init() {
-        this.router.post("/foods/intake", (req, res) => {
+        this.router.post("/intake", (req, res) => {
             this.foodController.addFood
         });
-        this.router.get("/foods/{date}", (req, res) => {
+        this.router.get("/{date}", (req, res) => {
             this.foodController.getNutritionInfo
         });
-        this.router.get("/foods/search", (req, res) => {
+        this.router.get("/search", (req, res) => {
             this.foodController.searchFoodDatabase
         });
     }

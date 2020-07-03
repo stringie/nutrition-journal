@@ -6,8 +6,8 @@ export default class UserRouter {
     public readonly router: Router;
 
     constructor(private userController: UserController, private authController: AuthController) {
-        this.router = Router();
-        this.init();
+        this.router = Router()
+        this.init()
     }
 
     private init() {
