@@ -4,10 +4,9 @@ import * as express from "express";
 import App from "./app";
 import FoodRouter from "./routes/foodRouter";
 import UserRouter from "./routes/userRouter";
-import FoodsController from "./controllers/foodController";
+import FoodController from "./controllers/foodController";
 import UserController from "./controllers/userController"
 import NutritionService from "../app/services/nutrition.service";
-import AuthController from "./controllers/authController";
 
 export default class Server {
 
@@ -19,7 +18,7 @@ export default class Server {
     }
 
     private async initDB(): Promise<void> {
-        await mongoose.connect("mongodb://admin:admin@mongo:27017/whf?authSource=admin", { useNewUrlParser: true } , err => {
+        await mongoose.connect("mongodb://admin:admin@mongo:27017/journal?authSource=admin", { useNewUrlParser: true, useUnifiedTopology: true } , err => {
             if (err) {
                 throw err
             }
@@ -30,14 +29,13 @@ export default class Server {
     private async initServer() {
         const nutritionService = new NutritionService()
 
-        const authController = new AuthController()
-        const foodController = new FoodsController(nutritionService)
+        const foodController = new FoodController(nutritionService)
         const userController = new UserController()
 
         const foodRouter = new FoodRouter(foodController)
-        const userRouter = new UserRouter(userController, authController)
+        const userRouter = new UserRouter(userController)
 
-        this.app = new App(foodRouter, userRouter).app
+        this.app = new App(userRouter, foodRouter).app
         this.app.set("port", 3000)
         
         const server = http.createServer(this.app)

@@ -1,6 +1,6 @@
 import {Request, Response} from "express"
 import {UserModel, UserSchema} from "../../app/schemas/user.schema"
-import bcrypt from "bcrypt"
+import * as bcrypt from "bcrypt"
 import * as jwt from "jsonwebtoken"
 
 export default class UserController {

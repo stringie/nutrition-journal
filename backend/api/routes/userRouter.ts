@@ -1,17 +1,16 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import UserController from "../controllers/userController";
-import AuthController from "../controllers/authController";
 
 export default class UserRouter {
     public readonly router: Router;
 
-    constructor(private userController: UserController, private authController: AuthController) {
+    constructor(private userController: UserController) {
         this.router = Router()
         this.init()
     }
 
     private init() {
-        this.router.post("/login", this.userController.authenticateUser)
-        this.router.post("/register", this.userController.registerUser)
+        this.router.post("/login", (req, res) => { this.userController.authenticateUser(req, res) })
+        this.router.post("/register", (req, res) => { this.userController.registerUser(req, res) })
     }
 }

@@ -1,5 +1,6 @@
-import { Router, Request, Response } from "express";
-import FoodController from "../controllers/foodController";
+import { Router } from "express"
+import FoodController from "../controllers/foodController"
+import * as passport from "passport"
 
 export default class FoodRouter {
     public readonly router: Router;
@@ -10,14 +11,8 @@ export default class FoodRouter {
     }
 
     private init() {
-        this.router.post("/intake", (req, res) => {
-            this.foodController.addFood
-        });
-        this.router.get("/{date}", (req, res) => {
-            this.foodController.getNutritionInfo
-        });
-        this.router.get("/search", (req, res) => {
-            this.foodController.searchFoodDatabase
-        });
+        this.router.post("/intake", passport.authenticate("jwt", { session: false }), (req, res) => { this.foodController.addFood(req, res) })
+        this.router.get("/intake/:date", passport.authenticate("jwt", { session: false }), (req, res) => { this.foodController.getNutritionInfo(req, res) })
+        this.router.post("/search", passport.authenticate("jwt", { session: false }), (req, res) => { this.foodController.searchFoodDatabase(req, res) })
     }
 }

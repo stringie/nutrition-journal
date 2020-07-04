@@ -34,9 +34,9 @@ export default class NutritionService {
         const result = {foods: []}
 
         for (let food of response.data.foods) {
-            const foodInfo = {nutrients: [], name: food.description}
+            const foodInfo = {name: food.description, nutrients: []}
             
-            for (let nutrient of food.nutrients) {
+            for (let nutrient of food.foodNutrients) {
                 foodInfo.nutrients.push({name: nutrient.nutrientName, value: nutrient.value, unit: nutrient.unitName})
             }
 

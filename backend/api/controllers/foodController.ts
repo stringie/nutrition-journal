@@ -31,7 +31,9 @@ export default class FoodController {
     }
 
     public async getNutritionInfo(req: Request, res: Response) {
-        const date = new Date(req.body.date)
+        
+        const date = new Date(req.params.date)
+        console.log(req.params.date)
 
         const dailyIntake = await DailyIntakeSchema.findOne({ date: date })
         if (dailyIntake) {
@@ -41,7 +43,8 @@ export default class FoodController {
             })
         } else {
             res.send({
-                success: false
+                success: false,
+                message: "No corresponding daily intake at date" + date
             })
         }
     }

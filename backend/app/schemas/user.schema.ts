@@ -1,6 +1,6 @@
 import { model, Schema, Model, Document } from "mongoose"
 import { User } from "../types/user"
-import bcrypt from "bcrypt"
+import * as bcrypt from "bcrypt"
 
 export interface UserModel extends Document, User {}
 
@@ -15,4 +15,4 @@ userSchema.pre<UserModel>('save', function(next) {
     next()
 });
 
-export const UserSchema: Model<UserModel> = model<UserModel>("DailyIntake", userSchema)
+export const UserSchema: Model<UserModel> = model<UserModel>("Users", userSchema)

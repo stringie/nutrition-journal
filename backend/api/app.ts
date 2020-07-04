@@ -1,18 +1,18 @@
-import FoodsRouter from "./routes/foodRouter"
+import FoodRouter from "./routes/foodRouter"
 import * as express from "express"
 import * as compression from "compression"
 import * as helmet from "helmet"
 import * as bodyParser from "body-parser"
 import * as cors from "cors"
 import UserRouter from "./routes/userRouter"
-import passport from "passport"
+import * as passport from "passport"
 import { Strategy, ExtractJwt } from "passport-jwt"
 import { UserSchema } from "../app/schemas/user.schema"
 
 export default class App {
     public app: express.Application
 
-    constructor(private foodsRouter: FoodsRouter, private userRouter: UserRouter) {
+    constructor(private userRouter: UserRouter, private foodRouter: FoodRouter) {
         this.app = express()
         this.initMiddleware()
         this.initRoutes()
@@ -51,7 +51,7 @@ export default class App {
     }
 
     private initRoutes(): void {
-        this.app.use("/api/foods", this.foodsRouter.router)
+        this.app.use("/api/foods", this.foodRouter.router)
         this.app.use("/api", this.userRouter.router)
     }
 }
