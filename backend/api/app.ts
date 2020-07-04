@@ -37,17 +37,20 @@ export default class App {
             new Strategy({
                 jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
                 secretOrKey: "secret"
-              }, (jwtToken, done) => {
-                UserSchema.findOne(jwtToken.username, (err, user) => {
-                    if (err) {
-                        return done(err, false);
-                    }
-                    if (user) {
-                        done(undefined, user);
-                    } else done(undefined, false);
-                });
-            })
-        );
+                }, (jwtToken, done) => {
+                    UserSchema.findOne({ username: jwtToken.username}, (err, user) => {
+                        if (err) {
+                            return done(err, false)
+                        }
+                        if (user) {
+                            done(undefined, user)
+                        } else {
+                            done(undefined, false)
+                        }
+                    });
+                }
+            )
+        )
     }
 
     private initRoutes(): void {

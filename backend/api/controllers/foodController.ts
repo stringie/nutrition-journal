@@ -1,26 +1,41 @@
 import { Request, Response } from "express";
-import { DailyIntakeSchema } from "../../app/schemas/daily-intake.schema";
+import { DailyIntakeSchema, DailyIntakeModel } from "../../app/schemas/daily-intake.schema";
 import NutritionService from "../../app/services/nutrition.service";
+import { Schema } from "mongoose";
 
 export default class FoodController {
     
     constructor(private nutritionService: NutritionService) {}
 
     public async addFood(req: Request, res: Response) {
-        const food: string = req.body.food
-        const quantity: number = Number(req.body.quantity)
-        const date = new Date(req.body.date)
         const fdcId = req.body.fdcId
+        const quantity: number = Number(req.body.quantity)
+        const date = new Date(req.params.date)
 
-        const dailyIntake = await DailyIntakeSchema.findOne({ date: date })
-        const foodInfo = await this.nutritionService.searchById(fdcId)
+        const food = await this.nutritionService.searchById(fdcId)
+        
+        if (!food) {
+            return res.send({
+                success: false,
+                message: "Food id invalid"
+            })
+        }
 
-        for (let f of foodInfo) {
-            dailyIntake.foods.push(f.name)
-            for (let nutrient of f.nutrients) {
-                const n = dailyIntake.nutrients[nutrient.name]
-                dailyIntake.nutrients[nutrient.name] = { value: n.value + nutrient.value, unit: nutrient.unit}
-            }
+        let dailyIntake: DailyIntakeModel = await DailyIntakeSchema.findOne({ date: date })
+
+
+        if (!dailyIntake) {
+            dailyIntake = new DailyIntakeSchema({
+                foods: [],
+                nutrients: new Map(),
+                date: date
+            })
+        }
+
+        dailyIntake.foods.push(food.name)
+        for (let nutrient of food.nutrients) {
+            const prevValue = dailyIntake.nutrients.has(nutrient.name) ? dailyIntake.nutrients.get(nutrient.name).value : 0
+            dailyIntake.nutrients.set(nutrient.name, { value: prevValue + (nutrient.value * quantity) / 100, unit: nutrient.unit })
         }
 
         await dailyIntake.save()
@@ -33,7 +48,6 @@ export default class FoodController {
     public async getNutritionInfo(req: Request, res: Response) {
         
         const date = new Date(req.params.date)
-        console.log(req.params.date)
 
         const dailyIntake = await DailyIntakeSchema.findOne({ date: date })
         if (dailyIntake) {
@@ -44,7 +58,7 @@ export default class FoodController {
         } else {
             res.send({
                 success: false,
-                message: "No corresponding daily intake at date" + date
+                message: "Nothing to show on: " + date.toDateString()
             })
         }
     }

@@ -21,16 +21,6 @@ export default class NutritionService {
 
         const response = await axios.post(this.API_URL_SEARCH, query)
 
-        return this.transformResponse(response)
-    }
-
-    public async searchById(fdcId: string): Promise<any> {
-        const response = await axios.get(this.API_URL_SEARCH_BY_ID.replace("###", fdcId))
-
-        return this.transformResponse(response)
-    }
-
-    private transformResponse(response: any) {
         const result = {foods: []}
 
         for (let food of response.data.foods) {
@@ -44,5 +34,21 @@ export default class NutritionService {
         }
 
         return result
+    }
+
+    public async searchById(fdcId: string): Promise<any> {
+        const response = await axios.get(this.API_URL_SEARCH_BY_ID.replace("###", fdcId))
+        
+        if (!response) {
+            return null
+        }
+
+        const foodInfo = {name: response.data.description, nutrients: []}
+        
+        for (let nutrientInfo of response.data.foodNutrients) {
+            foodInfo.nutrients.push({name: nutrientInfo.nutrient.name, value: nutrientInfo.amount ? nutrientInfo.amount : 0, unit: nutrientInfo.nutrient.unitName})
+        }
+    
+        return foodInfo
     }
 }
