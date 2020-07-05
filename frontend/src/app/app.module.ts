@@ -1,18 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FoodComponent } from './food/food.component';
 import { RequestService } from './request.service';
-import { FoodService } from './food.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from './auth/auth.module';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
-  declarations: [AppComponent, FoodComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [RequestService, FoodService],
+  declarations: [AppComponent, AlertComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, AuthModule],
+  providers: [RequestService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

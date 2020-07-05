@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { DailyIntakeSchema, DailyIntakeModel } from "../../app/schemas/daily-intake.schema";
 import NutritionService from "../../app/services/nutrition.service";
-import { Schema } from "mongoose";
 
 export default class FoodController {
     
@@ -22,7 +21,6 @@ export default class FoodController {
         }
 
         let dailyIntake: DailyIntakeModel = await DailyIntakeSchema.findOne({ date: date })
-
 
         if (!dailyIntake) {
             dailyIntake = new DailyIntakeSchema({

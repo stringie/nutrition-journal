@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-2 offset-5 mt-5">
+    <h3>Register</h3>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="form-group">
+        <label for="registerUsername">Username</label>
+        <input type="text" name="username" required ngModel #username="ngModel" class="form-control" id="registerUsername" placeholder="Enter username">
+      </div>
+      <div class="form-group">
+        <label for="registerPassword">Password</label>
+        <input type="password" name="password" ngModel required #password="ngModel" class="form-control" id="registerPassword" placeholder="Enter password">
+      </div>
+      <button type="submit" [disabled]="!f.valid" class="btn btn-primary" >Register</button>
+      <a routerLink="../login" class="btn btn-link">Cancel</a>
+    </form>
+  </div>
+</div>
