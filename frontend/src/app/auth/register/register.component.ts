@@ -8,7 +8,7 @@ import { AlertService } from 'src/app/alert/alert.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.sass']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
 
