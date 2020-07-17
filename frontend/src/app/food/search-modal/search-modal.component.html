@@ -1,0 +1,40 @@
+<ng-template #search let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="search-modal">Search food</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="dateOfBirth">Food name</label>
+              <div class="input-group">
+                <input class="text" ngbAutofocus [(ngModel)]="food" [ngModelOptions]="{standalone: true}" (ngModelChange)="searchFood()">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="list-group col left">
+          <button *ngFor="let food of foods" class="list-group-item list-group-item-action" (click)="selectFood(food.name)">{{ food.name }}</button>
+        </div>
+        <div class="list-group col right">
+          <ul *ngIf="selectedFoodNutrients" class="list-group">
+            <li class="list-group-item" *ngFor="let nutrient of selectedFoodNutrients">
+              {{ nutrient.name }}: {{nutrient.value}}{{nutrient.unit}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <input class="text" [(ngModel)]="quantity" placeholder="quantity in grams">
+      <button type="button" class="btn btn-outline-dark" (click)="sendId()">Add</button>
+    </div>
+  </ng-template>
+  
+  <button class="btn btn-lg btn-outline-primary" (click)="open(search)">Add Food</button>
