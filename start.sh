@@ -1,3 +1,5 @@
-docker-compose -f ./backend/docker-compose.yml up -d
-cd frontend
+cd backend
+npm install
+docker-compose up -d
+cd ../frontend
 ng serve
