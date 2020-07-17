@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm col-sm-3 left">
+      <ngb-datepicker [(ngModel)]="date" (dateSelect)="fetchFoods()"></ngb-datepicker>
+    </div>
+    <app-search-modal (messageEvent)="addFood($event)"></app-search-modal>
+    <div class="col-sm right">
+      <ul class="list-group">
+        <li *ngFor="let food of foods" class="list-group-item"> {{ food }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <ul class="list-group">
+        <li *ngFor="let nutrient of nutrients" class="list-group-item"> {{ nutrient[0] }}: {{nutrient[1].value}}{{nutrient[1].unit}} </li>
+      </ul>
+    </div>
+  </div>
+</div>
