@@ -4,6 +4,7 @@ import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { IntakeResponse } from '../types/intakeResponse';
 import { AlertService } from 'src/app/alert/alert.service';
 import { IntakeInfo } from '../types/intakeInfo';
+import { AccountService } from 'src/app/auth/account.service';
 
 @Component({
   selector: 'app-journal',
@@ -15,7 +16,7 @@ export class JournalComponent implements OnInit {
   public foods: [string]
   public nutrients: [string, { value: number, unit: string }]
 
-  constructor(private service: FoodService, private calendar: NgbCalendar, private alert: AlertService) { }
+  constructor(private service: FoodService, private calendar: NgbCalendar, private alert: AlertService, private auth: AccountService) { }
 
   ngOnInit() {
     this.date = this.calendar.getToday()
@@ -43,5 +44,9 @@ export class JournalComponent implements OnInit {
         this.fetchFoods()
       }
     })
+  }
+
+  public logout() {
+    this.auth.logout()
   }
 }
