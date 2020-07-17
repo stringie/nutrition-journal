@@ -11,8 +11,8 @@ export default class FoodRouter {
     }
 
     private init() {
-        this.router.post("/:date", passport.authenticate("jwt", { session: false }), (req, res) => { this.foodController.addFood(req, res) })
-        this.router.get("/:date", passport.authenticate("jwt", { session: false }), (req, res) => { this.foodController.getNutritionInfo(req, res) })
+        this.router.post("/intake/:date", passport.authenticate("jwt", { session: false }), (req, res) => { this.foodController.addFood(req, res) })
+        this.router.get("/intake/:date", passport.authenticate("jwt", { session: false }), (req, res) => { this.foodController.getNutritionInfo(req, res) })
         this.router.post("/search", passport.authenticate("jwt", { session: false }), (req, res) => { this.foodController.searchFoodDatabase(req, res) })
     }
 }

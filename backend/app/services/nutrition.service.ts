@@ -2,8 +2,8 @@ import axios from "axios"
 
 export default class NutritionService {
     
-    private readonly API_URL_SEARCH = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=DEMO_KEY"
-    private readonly API_URL_SEARCH_BY_ID = "https://api.nal.usda.gov/fdc/v1/food/###?api_key=DEMO_KEY"
+    private readonly API_URL_SEARCH = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=P9y7bjDZ1HYXna3KhrMaWeBGPQbz9YOjY4h35Bsc"
+    private readonly API_URL_SEARCH_BY_ID = "https://api.nal.usda.gov/fdc/v1/food/###?api_key=P9y7bjDZ1HYXna3KhrMaWeBGPQbz9YOjY4h35Bsc"
     private readonly PAGE_SIZE = 10
 
     public async search(food: string): Promise<any> {
@@ -19,12 +19,13 @@ export default class NutritionService {
             sortOrder: "desc"
         }
 
+        
         const response = await axios.post(this.API_URL_SEARCH, query)
 
         const result = {foods: []}
 
         for (let food of response.data.foods) {
-            const foodInfo = {name: food.description, nutrients: []}
+            const foodInfo = {name: food.description, nutrients: [], id: food.fdcId}
             
             for (let nutrient of food.foodNutrients) {
                 foodInfo.nutrients.push({name: nutrient.nutrientName, value: nutrient.value, unit: nutrient.unitName})

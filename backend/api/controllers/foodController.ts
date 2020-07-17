@@ -51,7 +51,7 @@ export default class FoodController {
         if (dailyIntake) {
             res.send({
                 success: true,
-                info: dailyIntake
+                info: { foods: dailyIntake.foods, nutrients: Array.from(dailyIntake.nutrients.entries()) }
             })
         } else {
             res.send({
@@ -71,7 +71,8 @@ export default class FoodController {
             })
         } else {
             res.send({
-                success: false
+                success: false,
+                message: "No foods found"
             })
         }
     }
