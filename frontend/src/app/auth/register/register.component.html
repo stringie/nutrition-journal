@@ -7,6 +7,10 @@
         <input type="text" name="username" required ngModel #username="ngModel" class="form-control" id="registerUsername" placeholder="Enter username">
       </div>
       <div class="form-group">
+        <label for="registerEmail">Email</label>
+        <input type="email" name="email" email ngModel required #email="ngModel" class="form-control" id="registerEmail" placeholder="Enter email">
+      </div>
+      <div class="form-group">
         <label for="registerPassword">Password</label>
         <input type="password" name="password" ngModel required #password="ngModel" class="form-control" id="registerPassword" placeholder="Enter password">
       </div>

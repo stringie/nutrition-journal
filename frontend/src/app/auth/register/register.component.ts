@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(f: NgForm) {
-    this.service.register(f.controls.username.value, f.controls.password.value).subscribe((response: RegisterResponse) => {
+    this.service.register(f.controls.username.value, f.controls.password.value, f.controls.email.value).subscribe((response: RegisterResponse) => {
       if (response.success) {
         this.router.navigate(["../login"])
         this.alert.success("Successfully registered account!")

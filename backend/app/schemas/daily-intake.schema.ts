@@ -9,6 +9,7 @@ const dailyIntakeSchema: Schema = new Schema({
         of: { value: Number, unit: String }
     },
     foods: [String],
+    quantities: [Number],
     date: Date
 });
 

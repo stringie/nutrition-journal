@@ -37,7 +37,8 @@ export default class UserController {
         if (!user) {
             user = new UserSchema({
                 username: req.body.username,
-                password: req.body.password
+                password: req.body.password,
+                email: req.body.email
             })
     
             await user.save()

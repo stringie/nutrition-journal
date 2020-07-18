@@ -6,7 +6,8 @@ export interface UserModel extends Document, User {}
 
 export const userSchema: Schema = new Schema({
     username: String,
-    password: String
+    password: String,
+    email: String
 });
 
 userSchema.pre<UserModel>('save', function(next) {

@@ -25,12 +25,14 @@ export default class FoodController {
         if (!dailyIntake) {
             dailyIntake = new DailyIntakeSchema({
                 foods: [],
+                quantities: [],
                 nutrients: new Map(),
                 date: date
             })
         }
 
         dailyIntake.foods.push(food.name)
+        dailyIntake.quantities.push(quantity)
         for (let nutrient of food.nutrients) {
             const prevValue = dailyIntake.nutrients.has(nutrient.name) ? dailyIntake.nutrients.get(nutrient.name).value : 0
             dailyIntake.nutrients.set(nutrient.name, { value: prevValue + (nutrient.value * quantity) / 100, unit: nutrient.unit })
@@ -51,7 +53,7 @@ export default class FoodController {
         if (dailyIntake) {
             res.send({
                 success: true,
-                info: { foods: dailyIntake.foods, nutrients: Array.from(dailyIntake.nutrients.entries()) }
+                info: { foods: dailyIntake.foods, quantities: dailyIntake.quantities, nutrients: Array.from(dailyIntake.nutrients.entries()) }
             })
         } else {
             res.send({

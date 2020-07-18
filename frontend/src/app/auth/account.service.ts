@@ -17,8 +17,8 @@ export class AccountService {
     return this.request.post(`/login`, { username, password })
   }
 
-  public register(username: string, password: string) {
-    return this.request.post(`/register`, { username, password })
+  public register(username: string, password: string, email: string) {
+    return this.request.post(`/register`, { username, password, email })
   }
 
   public logout() {

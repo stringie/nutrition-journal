@@ -10,16 +10,17 @@
     </div>
     <app-search-modal (messageEvent)="addFood($event)"></app-search-modal>
     <div class="col-sm right">
-      <ul class="list-group">
-        <li *ngFor="let food of foods" class="list-group-item"> {{ food }}</li>
+      <ul class="list-group" *ngIf="foods">
+        <li *ngFor="let food of foods; index as i" class="list-group-item"> {{ food }} - {{ quantities[i] }}g</li>
       </ul>
     </div>
   </div>
   <div class="row mt-3">
     <div class="col">
       <ul class="list-group">
-        <li *ngFor="let nutrient of nutrients" class="list-group-item"> {{ nutrient[0] }}: {{nutrient[1].value}}{{nutrient[1].unit}} </li>
+        <li *ngFor="let nutrient of nutrients" class="list-group-item"> {{ nutrient[0] }}: {{ nutrient[1].value | number: "1.2-2" }}{{ nutrient[1].unit }} <div class="bar" id={{nutrient[0]}}></div></li>
       </ul>
+      {{ applyProgress() }}
     </div>
   </div>
 </div>
