@@ -8,7 +8,7 @@ Requirements:
 - npm 
 - Docker 
 
-To start the application simply run `./start.sh`
+To start the application simply run `./start.sh` and use your Web Browser to navigate to localhost:4200
 
 To stop the application run `./stop.sh`
 
