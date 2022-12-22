@@ -21,7 +21,7 @@
     "ts-node": "^8.1.0",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5",
-    "jsonwebtoken": "8.5.1",
+    "jsonwebtoken": "9.0.0",
     "passport": "0.4.1",
     "passport-jwt": "4.0.0",
     "bcrypt": "5.0.0"
